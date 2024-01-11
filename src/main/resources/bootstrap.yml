@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active:
+    - mysql
+  application:
+    name: product-microservice
+  cloud:
+    config:      
+      uri:
+      - http://localhost:9000  
+      
+      
