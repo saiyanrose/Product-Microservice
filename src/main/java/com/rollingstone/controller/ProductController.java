@@ -21,14 +21,14 @@ import com.rollingstone.models.Product;
 import com.rollingstone.service.ProductService;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping(value ="/ecom/product-service")
 public class ProductController extends AbstractController {
 
 	@Autowired
 	private ProductService productService;
 
 
-	@PostMapping("")
+	@PostMapping("/product")
 	public ResponseEntity<?> save(@RequestBody Product product, @RequestParam("parentCatId") Long parentCatId,
 			@RequestParam("childCatId") Long childCatId) {	
 
@@ -42,7 +42,7 @@ public class ProductController extends AbstractController {
 
 	
 
-	@GetMapping("/{id}")
+	@GetMapping("/product/{id}")
 	public ResponseEntity<?> get(@PathVariable("id") Long id) {
 		Product product = new Product();
 		try {
@@ -55,7 +55,7 @@ public class ProductController extends AbstractController {
 		return ResponseEntity.ok().body(product);
 	}
 
-	@GetMapping("")
+	@GetMapping("/product")
 	public ResponseEntity<Page<Product>> getProductsByPage(
 			@RequestParam(value = "pageNum", defaultValue = "0") Integer pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
@@ -63,7 +63,7 @@ public class ProductController extends AbstractController {
 		return ResponseEntity.ok().body(productList);
 	}
 
-	@PutMapping("/{id}/{parentCategoryId}/{childCategory}")
+	@PutMapping("/product/{id}/{parentCategoryId}/{childCategory}")
 	public ResponseEntity<?> update(@PathVariable("id") Long id, @PathVariable("parentCategoryId") Long parentCatId,
 			@PathVariable("childCategory") Long childCatId, @RequestBody Product product) {
 		try {
@@ -74,7 +74,7 @@ public class ProductController extends AbstractController {
 		return ResponseEntity.ok().body("Product has been updated successfully.");
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/product/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
 		try {
 			productService.delete(id);
